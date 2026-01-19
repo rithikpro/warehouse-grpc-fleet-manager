@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option csharp_namespace = "WarehouseGrpc";
+
+package warehouse;
+
+service FleetManager {
+  rpc ConnectRobot(stream TelemetryRequest) returns (stream FleetCommand);
+}
+
+message TelemetryRequest {
+  string robot_id = 1;
+  double x = 2; double y = 3;
+  double battery_pct = 4;
+  string status = 5;  // "idle", "picking", "error"
+  string payload = 6; // Current items
+}
+
+message FleetCommand {
+  string robot_id = 1;
+  oneof command {
+    TaskAssignment task = 2;
+    //EmergencyStop stop = 3;
+  }
+}
+
+message TaskAssignment {
+  string task_id = 1;
+  string action = 2;     // "pick", "drop"
+  string location = 3;   // "Aisle-5-Bay-12"
+  string item_id = 4;
+}

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36603.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarehouseGrpcServer", "WarehouseGrpcServer.csproj", "{F17DCBAF-35B9-4308-8151-3421AAA5DA36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotClient", "..\RobotClient\RobotClient.csproj", "{0263AED5-DA48-48B3-A023-5AF42CCE6C4C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F17DCBAF-35B9-4308-8151-3421AAA5DA36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F17DCBAF-35B9-4308-8151-3421AAA5DA36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F17DCBAF-35B9-4308-8151-3421AAA5DA36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F17DCBAF-35B9-4308-8151-3421AAA5DA36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0263AED5-DA48-48B3-A023-5AF42CCE6C4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0263AED5-DA48-48B3-A023-5AF42CCE6C4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0263AED5-DA48-48B3-A023-5AF42CCE6C4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0263AED5-DA48-48B3-A023-5AF42CCE6C4C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BDE5770E-3586-481E-8EAF-EB0353E0AC9A}
+	EndGlobalSection
+EndGlobal
