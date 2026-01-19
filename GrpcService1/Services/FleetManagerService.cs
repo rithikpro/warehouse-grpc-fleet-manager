@@ -8,13 +8,13 @@ namespace GrpcService1.Services
     {
 
         private readonly ILogger<FleetManagerService> _logger;
-        private readonly List<TaskAssignment> _pendingTasks = new()
-        {
-            new() { TaskId = "T1", Action = "pick",   Location = "Aisle-5",  ItemId = "SKU123" },
-            new() { TaskId = "T2", Action = "move",   Location = "Aisle-3",  ItemId = "SKU456" },
-            new() { TaskId = "T3", Action = "restock",Location = "Aisle-8",  ItemId = "SKU789" },
-            new() { TaskId = "T4", Action = "inspect",Location = "Aisle-1",  ItemId = "SKU321" }
-        };
+        private readonly ConcurrentQueue<TaskAssignment> _pendingTasks = new ConcurrentQueue<TaskAssignment>(new TaskAssignment[]
+    {
+        new() { TaskId = "T1", Action = "pick",     Location = "Aisle-5", ItemId = "SKU123" },
+        new() { TaskId = "T2", Action = "move",     Location = "Aisle-3", ItemId = "SKU456" },
+        new() { TaskId = "T3", Action = "restock",  Location = "Aisle-8", ItemId = "SKU789" },
+        new() { TaskId = "T4", Action = "inspect",  Location = "Aisle-1", ItemId = "SKU321" }
+    });
 
 
         public FleetManagerService(ILogger<FleetManagerService> logger) => _logger = logger;
@@ -32,11 +32,11 @@ namespace GrpcService1.Services
                     _logger.LogInformation("Telemetry from {RobotId}: ({X},{Y}) {Battery}% {Status}",
                         robotId, req.X, req.Y, req.BatteryPct, req.Status);
 
-                    // Assign task if idle and pending tasks exist
-                    if (req.Status == "idle" && _pendingTasks.Any())
+                    // thread safe - handle race condition
+                    if (req.Status == "idle" && _pendingTasks.TryDequeue(out var task))
                     {
-                        var task = _pendingTasks.First();
-                        _pendingTasks.Remove(task);
+                        _logger.LogInformation("Assigned {TaskId} to {RobotId}", task.TaskId, robotId);
+
                         await responseStream.WriteAsync(new FleetCommand
                         {
                             RobotId = robotId,
