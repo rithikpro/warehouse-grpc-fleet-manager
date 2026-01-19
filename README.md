@@ -12,4 +12,3 @@ Real-time robot coordination using gRPC bidirectional streams.
 - gRPC (.NET)
 - Bidirectional streaming
 - Protobuf schemas
-- React dashboard
